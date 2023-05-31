@@ -14,44 +14,44 @@ namespace BlogApp.Facade
             _context = context;
         }
 
-        public IActionResult GetBooks()
+        public IActionResult GetBlogs()
         {
-            return Ok(_context.BOOK.ToList().Where(p => p.State == "Pending") ?? throw new Exception("No hay libros en el blog."));
+            return Ok(_context.BLOG.ToList().Where(p => p.State == "Pending") ?? throw new Exception("No hay blogs disponibles."));
         }
 
-        public IActionResult GetBookByCod(int cod)
+        public IActionResult GetBlogByCod(int cod)
         {
-            return Ok(_context.BOOK.FirstOrDefault(p => p.COD_BOOK == cod && p.State == "Pending") ?? throw new Exception("Libro inexistente."));
+            return Ok(_context.BLOG.FirstOrDefault(p => p.COD_BLOG == cod && p.State == "Pending") ?? throw new Exception("Blog inexistente."));
         }
 
-        public IActionResult CreateBook(Book newBook)
+        public IActionResult CreateBlog(Blog newBlog)
         {
-            if (!ValidationHelper.ValidateForPost(newBook))
+            if (!ValidationHelper.ValidateForPost(newBlog))
             {
-                return BadRequest("Datos de libro inválidos.");
+                return BadRequest("Datos del blog inválidos.");
             }
 
-            newBook.COD_BOOK = 0;
-            newBook.State = "Pending";
+            newBlog.COD_BLOG = 0;
+            newBlog.State = "Pending";
 
-            _context.BOOK.Add(newBook);
+            _context.BLOG.Add(newBlog);
             _context.SaveChanges();
 
-            return Ok("Libro creado exitosamente.");
+            return Ok("Blog creado exitosamente.");
         }
 
-        public IActionResult UpdateBook(int cod, Book updatedBlog)
+        public IActionResult UpdateBlog(int cod, Blog updatedBlog)
         {
             if (!ValidationHelper.ValidateForPut(updatedBlog))
             {
-                return BadRequest("Datos del libro inválidos.");
+                return BadRequest("Datos del blog inválidos.");
             }
 
-            Book? existingBlog = _context.BOOK.FirstOrDefault(p => p.COD_BOOK == cod);
+            Blog? existingBlog = _context.BLOG.FirstOrDefault(p => p.COD_BLOG == cod);
 
             if (existingBlog == null)
             {
-                return NotFound("Libro no encontrado.");
+                return NotFound("Blog no encontrado.");
             }
 
             existingBlog.Title = updatedBlog.Title;
@@ -62,7 +62,7 @@ namespace BlogApp.Facade
 
             _context.SaveChanges();
 
-            return Ok("Libro actualizado exitosamente.");
+            return Ok("Blog actualizado exitosamente.");
         }
     }
 }

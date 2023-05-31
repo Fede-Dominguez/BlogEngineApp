@@ -7,54 +7,54 @@ namespace BlogApp.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class BlogBooksController : ControllerBase
+    public class BlogController : ControllerBase
     {
         private readonly BlogContext _context;
 
-        public BlogBooksController()
+        public BlogController()
         {
             _context = new BlogContext();
         }
 
         // GET
-        [HttpGet("GetBooks")]
-        public IActionResult GetBooks()
+        [HttpGet("GetBlos")]
+        public IActionResult GetBlogs()
         {
             BlogFacade blogFacade = new BlogFacade(_context);
             try
             {
-                return Ok(blogFacade.GetBooks());
+                return Ok(blogFacade.GetBlogs());
             }
             catch (Exception e)
             {
-                throw new Exception("Hubo un error al obtener los libros." + e.Message);
+                throw new Exception("Hubo un error al obtener los blogs." + e.Message);
             }
         }
 
         // GET
-        [HttpGet("GetBooksByCod")]
+        [HttpGet("GetBlogsByCod")]
         public IActionResult GetBlogById(int cod)
         {
             BlogFacade blogFacade = new BlogFacade(_context);
             try
             {
-                return blogFacade.GetBookByCod(cod);
+                return blogFacade.GetBlogByCod(cod);
             }
             catch (Exception e)
             {
-                throw new Exception("Hubo un error al obtener el libro." + e.Message);
+                throw new Exception("Hubo un error al obtener el blog." + e.Message);
             }
         }
 
         // POST 
-        [HttpPost("SaveBooks")]
-        public IActionResult CreateBlog([FromBody] Book newBook)
+        [HttpPost("SaveBlogs")]
+        public IActionResult CreateBlog([FromBody] Blog newBlog)
         {
             BlogFacade blogFacade = new BlogFacade(_context);
 
             try
             {   
-                return blogFacade.CreateBook(newBook);
+                return blogFacade.CreateBlog(newBlog);
             }
             catch (Exception e)
             {
@@ -63,18 +63,18 @@ namespace BlogApp.Controllers
         }
 
         // PUT
-        [HttpPut("UpdateBooks")]
-        public IActionResult UpdateBlog(int cod, [FromBody] Book updatedBook)
+        [HttpPut("UpdateBlogs")]
+        public IActionResult UpdateBlog(int cod, [FromBody] Blog updatedBlog)
         {
             BlogFacade blogFacade = new BlogFacade(_context);
 
             try
             {
-                return blogFacade.UpdateBook(cod, updatedBook);
+                return blogFacade.UpdateBlog(cod, updatedBlog);
             }
             catch (Exception e)
             {
-                throw new Exception("Hubo un error al modificar el libro." + e.Message);
+                throw new Exception("Hubo un error al modificar el blog." + e.Message);
             }
         }
     }

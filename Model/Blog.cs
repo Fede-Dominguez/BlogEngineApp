@@ -2,9 +2,9 @@
 
 namespace BlogApp.Model
 {
-    public class Book
+    public class Blog
     {
-        [Key] public int COD_BOOK { get; set; }
+        [Key] public int COD_BLOG { get; set; }
         public required string Title { get; set; }
         public string Description { get; set; }
         public required string Author { get; set; }

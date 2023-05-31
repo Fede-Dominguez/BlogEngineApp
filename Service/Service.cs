@@ -7,7 +7,7 @@ namespace BlogApp.Service
     // Contexto de base de datos utilizando EF Core
     public class BlogContext : DbContext
     {
-        public DbSet<Book> BOOK { get; set; }
+        public DbSet<Blog> BLOG { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

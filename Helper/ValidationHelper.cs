@@ -1,18 +1,17 @@
 ﻿using BlogApp.Model;
-using System.Reflection.Metadata;
 
 namespace BlogApp.Helper
 {
     public static class ValidationHelper
     {
-        public static bool ValidateForPost(Book book)
+        public static bool ValidateForPost(Blog blog)
         {
-            if (string.IsNullOrWhiteSpace(book.Title))
+            if (string.IsNullOrWhiteSpace(blog.Title))
             {
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(book.Author))
+            if (string.IsNullOrWhiteSpace(blog.Author))
             {
                 return false;
             }
@@ -20,14 +19,19 @@ namespace BlogApp.Helper
             return true;
         }
 
-        public static bool ValidateForPut(Book book)
+        public static bool ValidateForPut(Blog blog)
         {
-            if (string.IsNullOrWhiteSpace(book.Title))
+            if (string.IsNullOrWhiteSpace(blog.Title))
             {
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(book.Author))
+            if (string.IsNullOrWhiteSpace(blog.Author))
+            {
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(blog.State) || (blog.State != "Pending" || blog.State != "Published"))
             {
                 return false;
             }
