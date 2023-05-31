@@ -22,11 +22,6 @@ namespace BlogApp.Helper
 
         public static bool ValidateForPut(Book book)
         {
-            if (book.COD_BOOK <= 0)
-            {
-                return false;
-            }
-
             if (string.IsNullOrWhiteSpace(book.Title))
             {
                 return false;

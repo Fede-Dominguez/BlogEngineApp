@@ -16,12 +16,12 @@ namespace BlogApp.Facade
 
         public IActionResult GetBooks()
         {
-            return Ok(_context.BOOK.ToList() ?? throw new Exception("No hay libros en el blog."));
+            return Ok(_context.BOOK.ToList().Where(p => p.State == "Pending") ?? throw new Exception("No hay libros en el blog."));
         }
 
         public IActionResult GetBookByCod(int cod)
         {
-            return Ok(_context.BOOK.FirstOrDefault(blog => blog.COD_BOOK == cod) ?? throw new Exception("Libro inexistente."));
+            return Ok(_context.BOOK.FirstOrDefault(p => p.COD_BOOK == cod && p.State == "Pending") ?? throw new Exception("Libro inexistente."));
         }
 
         public IActionResult CreateBook(Book newBook)
@@ -47,7 +47,7 @@ namespace BlogApp.Facade
                 return BadRequest("Datos del libro inválidos.");
             }
 
-            Book? existingBlog = _context.BOOK.FirstOrDefault(blog => blog.COD_BOOK == cod);
+            Book? existingBlog = _context.BOOK.FirstOrDefault(p => p.COD_BOOK == cod);
 
             if (existingBlog == null)
             {
