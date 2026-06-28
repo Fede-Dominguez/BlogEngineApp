@@ -31,7 +31,7 @@ namespace BlogApp.Helper
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(blog.State) || (blog.State != "Pending" || blog.State != "Published"))
+            if (string.IsNullOrWhiteSpace(blog.State) || (blog.State != "Pending" && blog.State != "Published"))
             {
                 return false;
             }
